@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Theft EMS — Alert Center</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <div class="brand-icon">⚡</div>
+                    <div class="brand-text">
+                        <h2>Anti-Theft EMS</h2>
+                        <span>Monitoring System</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="monitor.html" class="nav-link" id="nav-monitor">
+                        <span class="nav-icon">📡</span>
+                        Live Monitor
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Management</div>
+                    <a href="consumers.html" class="nav-link" id="nav-consumers">
+                        <span class="nav-icon">👥</span>
+                        Consumers
+                    </a>
+                    <a href="predictions.html" class="nav-link" id="nav-predictions">
+                        <span class="nav-icon">🤖</span>
+                        Predictions
+                    </a>
+                    <a href="alerts.html" class="nav-link active" id="nav-alerts">
+                        <span class="nav-icon">🔔</span>
+                        Alerts
+                        <span class="nav-badge hidden" id="alert-badge">0</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user" id="logout-btn" title="Click to logout">
+                    <div class="user-avatar" id="sidebar-user-avatar">A</div>
+                    <div class="user-info">
+                        <h4 id="sidebar-user-name">Admin</h4>
+                        <span id="sidebar-user-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="page-header">
+                <div class="header-left">
+                    <button class="mobile-toggle" id="mobile-toggle">☰</button>
+                    <h1>🔔 Theft Alert Center</h1>
+                    <p>Real-time security alerts and theft notifications (<span id="alert-unread">0</span> unread / <span id="alert-total">0</span> total)</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary btn-sm" onclick="markAllRead()">✓ Mark All Read</button>
+                </div>
+            </header>
+
+            <div class="page-body">
+                <div class="card mb-3">
+                    <div class="card-header flex-between">
+                        <h3>Filter Notifications</h3>
+                        <div class="filter-bar">
+                            <select id="severity-filter">
+                                <option value="">All Severities</option>
+                                <option value="critical">Critical</option>
+                                <option value="warning">Warning</option>
+                                <option value="info">Info</option>
+                            </select>
+                            <select id="read-filter">
+                                <option value="">All Statuses</option>
+                                <option value="false">Unread Only</option>
+                                <option value="true">Read Only</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="alerts-list">
+                            <!-- Dynamic alert items -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/alerts.js"></script>
+</body>
+</html>

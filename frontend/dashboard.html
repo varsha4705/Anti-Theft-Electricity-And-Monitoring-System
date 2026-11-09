@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Theft Electricity Monitoring System — Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <div class="brand-icon">⚡</div>
+                    <div class="brand-text">
+                        <h2>Anti-Theft EMS</h2>
+                        <span>Monitoring System</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-link active" id="nav-dashboard">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="monitor.html" class="nav-link" id="nav-monitor">
+                        <span class="nav-icon">📡</span>
+                        Live Monitor
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Management</div>
+                    <a href="consumers.html" class="nav-link" id="nav-consumers">
+                        <span class="nav-icon">👥</span>
+                        Consumers
+                    </a>
+                    <a href="predictions.html" class="nav-link" id="nav-predictions">
+                        <span class="nav-icon">🤖</span>
+                        Predictions
+                    </a>
+                    <a href="alerts.html" class="nav-link" id="nav-alerts">
+                        <span class="nav-icon">🔔</span>
+                        Alerts
+                        <span class="nav-badge hidden" id="alert-badge">0</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user" id="logout-btn" title="Click to logout">
+                    <div class="user-avatar" id="sidebar-user-avatar">A</div>
+                    <div class="user-info">
+                        <h4 id="sidebar-user-name">Admin</h4>
+                        <span id="sidebar-user-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="page-header">
+                <div class="header-left">
+                    <button class="mobile-toggle" id="mobile-toggle">☰</button>
+                    <h1>Overview Dashboard</h1>
+                    <p>Real-time analytics and theft detection summary</p>
+                </div>
+                <div class="header-actions">
+                    <a href="monitor.html" class="btn btn-primary btn-sm">📡 Live Monitor</a>
+                </div>
+            </header>
+
+            <div class="page-body">
+                <!-- STATS CARDS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon cyan">👥</div>
+                            <span class="badge badge-info">Total</span>
+                        </div>
+                        <div class="stat-value" id="stat-total-consumers">0</div>
+                        <div class="stat-label">Total Consumers</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon red">🚨</div>
+                            <span class="badge badge-danger">Alert</span>
+                        </div>
+                        <div class="stat-value text-red" id="stat-theft-detected">0</div>
+                        <div class="stat-label">Theft Cases Detected</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon green">✅</div>
+                            <span class="badge badge-success">Normal</span>
+                        </div>
+                        <div class="stat-value text-green" id="stat-normal-users">0</div>
+                        <div class="stat-label">Normal Consumers</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon purple">🎯</div>
+                            <span class="badge badge-info">RF Model</span>
+                        </div>
+                        <div class="stat-value text-purple" id="stat-model-accuracy">97.8%</div>
+                        <div class="stat-label">Model Accuracy</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon amber">🔔</div>
+                            <span class="badge badge-warning">Unread</span>
+                        </div>
+                        <div class="stat-value text-yellow" id="stat-unread-alerts">0</div>
+                        <div class="stat-label">Active Alerts</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon cyan">📊</div>
+                            <span class="badge badge-neutral">Total</span>
+                        </div>
+                        <div class="stat-value" id="stat-total-readings">0</div>
+                        <div class="stat-label">Sensor Readings</div>
+                    </div>
+                </div>
+
+                <!-- CHARTS ROW 1 -->
+                <div class="grid-2 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>📈 Detection Trend (Last 7 Days)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="trend-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>🍩 Theft Ratio</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="ratio-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS ROW 2 -->
+                <div class="grid-2 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>📍 Theft Cases by Region / Area</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="area-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>⏰ Hourly Theft Distribution</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="hourly-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ALERTS LIST -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🚨 Recent Theft Alerts</h3>
+                        <a href="alerts.html" class="btn btn-secondary btn-sm">View All Alerts</a>
+                    </div>
+                    <div class="card-body" id="recent-alerts-list">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Theft EMS — Live Monitor</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <div class="brand-icon">⚡</div>
+                    <div class="brand-text">
+                        <h2>Anti-Theft EMS</h2>
+                        <span>Monitoring System</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="monitor.html" class="nav-link active" id="nav-monitor">
+                        <span class="nav-icon">📡</span>
+                        Live Monitor
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Management</div>
+                    <a href="consumers.html" class="nav-link" id="nav-consumers">
+                        <span class="nav-icon">👥</span>
+                        Consumers
+                    </a>
+                    <a href="predictions.html" class="nav-link" id="nav-predictions">
+                        <span class="nav-icon">🤖</span>
+                        Predictions
+                    </a>
+                    <a href="alerts.html" class="nav-link" id="nav-alerts">
+                        <span class="nav-icon">🔔</span>
+                        Alerts
+                        <span class="nav-badge hidden" id="alert-badge">0</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user" id="logout-btn" title="Click to logout">
+                    <div class="user-avatar" id="sidebar-user-avatar">A</div>
+                    <div class="user-info">
+                        <h4 id="sidebar-user-name">Admin</h4>
+                        <span id="sidebar-user-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="page-header">
+                <div class="header-left">
+                    <button class="mobile-toggle" id="mobile-toggle">☰</button>
+                    <h1>📡 Live CT Sensor Monitor</h1>
+                    <p>Real-time current comparison (Incoming vs Meter Output)</p>
+                </div>
+                <div class="header-actions">
+                    <span class="badge badge-success badge-dot">Live Polling (5s)</span>
+                </div>
+            </header>
+
+            <div class="page-body">
+                <!-- LIVE SENSOR GAUGES GRID -->
+                <div class="gauge-grid" id="live-grid">
+                    <!-- Dynamic live cards populated by monitor.js -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- CONSUMER DETAIL MODAL -->
+    <div class="modal-overlay" id="consumer-detail-modal">
+        <div class="modal" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3 id="detail-consumer-name">Consumer Detail</h3>
+                <button class="modal-close" onclick="closeModal('consumer-detail-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="detail-consumer-info" class="mb-3"></div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📈 Current Reading History (I_in vs I_out)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="detail-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/monitor.js"></script>
+</body>
+</html>
